@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eye-Blink Morse Communicator</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>👁️ Eye-Blink Morse</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="communication.html" class="nav-link">Communication</a>
+                <a href="messages.html" class="nav-link">Messages</a>
+                <a href="settings.html" class="nav-link">Settings</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Eye-Blink Morse Communicator</h1>
+                <p>Transform eye blinks into meaningful communication using Morse code</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="location.href='communication.html'">
+                        <span>📡</span> Start Communication
+                    </button>
+                    <button class="btn btn-secondary" id="connectDeviceBtn">
+                        <span>🔗</span> Connect Device
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard -->
+        <section class="dashboard">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📨</div>
+                    <div class="stat-number" id="messageCount">0</div>
+                    <div class="stat-label">Messages Sent</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📶</div>
+                    <div class="stat-status" id="deviceStatus">Offline</div>
+                    <div class="stat-label">Device Status</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-number" id="sessionTime">00:00</div>
+                    <div class="stat-label">Session Time</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Messages -->
+        <section class="card">
+            <div class="card-header">
+                <h3>Recent Messages</h3>
+                <a href="messages.html" class="btn btn-outline btn-sm">View All</a>
+            </div>
+            <div class="card-body">
+                <div id="recentMessages">
+                    <div class="empty-state">No messages yet</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Guide -->
+        <section class="card">
+            <div class="card-header">
+                <h3>📋 Quick Start Guide</h3>
+            </div>
+            <div class="card-body">
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Pair Your Device</h4>
+                            <p>Connect your ESP32 via Bluetooth: Settings → Bluetooth & devices → Add device</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Close Arduino Monitor</h4>
+                            <p>Ensure only one application uses the COM port at a time</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Start Communication</h4>
+                            <p>Click "Start Communication" and connect to your device</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Start Blinking</h4>
+                            <p>Short blink = dot (.), Long blink = dash (-), Pause = word separator</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Morse Code Chart -->
+        <section class="card">
+            <div class="card-header">
+                <h3>📖 Morse Code Reference</h3>
+                <button class="btn btn-outline btn-sm" id="toggleMorseChart">Show Chart</button>
+            </div>
+            <div class="card-body" id="morseChartContent" style="display: none;">
+                <div class="morse-grid">
+                    <div class="morse-section">
+                        <h4>Letters</h4>
+                        <div id="morseLetters" class="morse-table"></div>
+                    </div>
+                    <div class="morse-section">
+                        <h4>Numbers</h4>
+                        <div id="morseNumbers" class="morse-table"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Eye-Blink Morse Communicator. Built for accessibility and communication.</p>
+        </div>
+    </footer>
+
+    <script src="morse.js"></script>
+    <script src="storage.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

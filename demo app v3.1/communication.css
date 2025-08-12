@@ -1,0 +1,500 @@
+/* ==================== COMMUNICATION PAGE STYLES ==================== */
+
+/* Connection Status */
+.connection-status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-weight: 600;
+}
+
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+.status-indicator.online {
+    background: var(--success);
+    box-shadow: 0 0 0 0 var(--success);
+    animation: pulse-green 2s infinite;
+}
+
+.status-indicator.offline {
+    background: var(--text-muted);
+    animation: none;
+}
+
+@keyframes pulse-green {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 var(--success);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+    }
+}
+
+.connection-controls {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+}
+
+.device-info {
+    margin-top: var(--space-lg);
+    padding: var(--space-lg);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+}
+
+.device-info p {
+    margin-bottom: var(--space-sm);
+    font-size: var(--font-size-sm);
+}
+
+.device-info p:last-child {
+    margin-bottom: 0;
+}
+
+/* Live Status */
+.live-status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.pulse-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary);
+    animation: pulse 1.5s infinite;
+}
+
+/* Morse Display */
+.morse-display {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-lg);
+}
+
+.morse-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.morse-section label {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Building Display */
+.morse-building {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-lg);
+    font-family: 'Courier New', monospace;
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    min-height: 60px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.morse-building.building-dot {
+    border-color: var(--primary);
+    background: rgba(59, 130, 246, 0.1);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    animation: building-pulse-dot 1s ease-in-out;
+}
+
+.morse-building.building-dash {
+    border-color: var(--warning);
+    background: rgba(245, 158, 11, 0.1);
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+    animation: building-pulse-dash 1s ease-in-out;
+}
+
+@keyframes building-pulse-dot {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+@keyframes building-pulse-dash {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+.building-text {
+    flex: 1;
+    color: var(--text-primary);
+}
+
+.building-cursor {
+    width: 2px;
+    height: 24px;
+    background: var(--primary);
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+.morse-raw {
+    padding: var(--space-sm) var(--space-md);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    font-family: 'Courier New', monospace;
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+/* Decoded Display */
+.decoded-display {
+    padding: var(--space-lg);
+    background: var(--bg-primary);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-lg);
+    min-height: 120px;
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+    transition: var(--transition);
+    position: relative;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.decoded-display:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.decoded-display:empty::before {
+    content: 'Decoded text will appear here...';
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.word-count {
+    margin-top: var(--space-sm);
+    font-size: var(--font-size-xs);
+    color: var(--text-muted);
+    display: flex;
+    gap: var(--space-lg);
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    margin-top: var(--space-lg);
+}
+
+.action-buttons .btn {
+    flex: 1;
+    min-width: 140px;
+}
+
+/* Manual Input */
+.manual-input-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.manual-display {
+    padding: var(--space-lg);
+    background: var(--bg-secondary);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-lg);
+    min-height: 80px;
+    font-family: 'Courier New', monospace;
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    transition: var(--transition);
+    outline: none;
+}
+
+.manual-display:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.manual-display:empty::before {
+    content: 'Type or click buttons to build Morse code...';
+    color: var(--text-muted);
+    font-style: italic;
+    font-weight: normal;
+}
+
+.manual-controls {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* Morse Buttons */
+.morse-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-md);
+    background: var(--bg-primary);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: var(--transition);
+    min-width: 80px;
+    font-family: inherit;
+    position: relative;
+    overflow: hidden;
+}
+
+.morse-btn:hover {
+    border-color: var(--primary);
+    background: var(--bg-secondary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.morse-btn:active {
+    transform: translateY(0);
+}
+
+.morse-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+    transition: var(--transition-slow);
+}
+
+.morse-btn:hover::before {
+    left: 100%;
+}
+
+.morse-symbol {
+    font-size: var(--font-size-xl);
+    font-weight: 800;
+    color: var(--primary);
+    font-family: 'Courier New', monospace;
+}
+
+.morse-label {
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Quick Reference */
+.quick-ref {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.quick-ref.show {
+    display: block;
+}
+
+.ref-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-xl);
+}
+
+.ref-section h4 {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin-bottom: var(--space-md);
+    color: var(--text-primary);
+    text-align: center;
+    padding-bottom: var(--space-sm);
+    border-bottom: 2px solid var(--border);
+}
+
+.ref-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.ref-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-sm) var(--space-md);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    font-family: 'Courier New', monospace;
+    transition: var(--transition);
+}
+
+.ref-item:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--primary);
+    transform: scale(1.02);
+}
+
+.ref-item code {
+    font-weight: 700;
+    color: var(--primary);
+    background: none;
+    padding: 0;
+}
+
+/* Live Morse Animations */
+.morse-building.active {
+    animation: morse-activity 0.5s ease-in-out;
+}
+
+@keyframes morse-activity {
+    0% { background: var(--bg-tertiary); }
+    50% { background: rgba(59, 130, 246, 0.2); }
+    100% { background: var(--bg-tertiary); }
+}
+
+/* Translation Display */
+.translation-result {
+    margin-top: var(--space-lg);
+    padding: var(--space-lg);
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1));
+    border: 2px solid var(--secondary);
+    border-radius: var(--radius-lg);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.translation-result h4 {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--secondary);
+    margin-bottom: var(--space-md);
+}
+
+.translation-text {
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+}
+
+/* Success/Error States */
+.connection-success {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.1));
+    border-color: var(--success);
+}
+
+.connection-error {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1));
+    border-color: var(--danger);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .morse-display {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+    
+    .connection-controls {
+        flex-direction: column;
+    }
+    
+    .connection-controls .btn {
+        width: 100%;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .action-buttons .btn {
+        min-width: auto;
+    }
+    
+    .manual-controls {
+        justify-content: center;
+    }
+    
+    .morse-btn {
+        min-width: 70px;
+    }
+    
+    .ref-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .morse-building {
+        font-size: var(--font-size-lg);
+        padding: var(--space-md);
+        min-height: 50px;
+    }
+    
+    .decoded-display {
+        font-size: var(--font-size-md);
+        min-height: 100px;
+        padding: var(--space-md);
+    }
+    
+    .manual-display {
+        font-size: var(--font-size-md);
+        min-height: 60px;
+        padding: var(--space-md);
+    }
+    
+    .morse-btn {
+        min-width: 60px;
+        padding: var(--space-sm);
+    }
+    
+    .morse-symbol {
+        font-size: var(--font-size-lg);
+    }
+    
+    .word-count {
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+}
