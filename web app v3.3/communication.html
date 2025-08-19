@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Communication - Eye-Blink Morse</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="communication.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>👁️ Eye-Blink Morse</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="communication.html" class="nav-link active">Communication</a>
+                <a href="messages.html" class="nav-link">Messages</a>
+                <a href="settings.html" class="nav-link">Settings</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Device Connection -->
+        <section class="card">
+            <div class="card-header">
+                <h3>🔗 Device Connection</h3>
+                <div class="connection-status" id="connectionStatus">
+                    <span class="status-indicator offline"></span>
+                    <span id="statusText">Disconnected</span>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="connection-controls">
+                    <button class="btn btn-primary" id="connectSerialBtn">
+                        <span>🔌</span> Connect Serial
+                    </button>
+                    <button class="btn btn-danger" id="disconnectSerialBtn" disabled>
+                        <span>❌</span> Disconnect
+                    </button>
+                </div>
+                <div class="device-info" id="deviceInfo" style="display: none;">
+                    <p><strong>Port:</strong> <span id="portName">-</span></p>
+                    <p><strong>Baud Rate:</strong> 115200</p>
+                    <p><strong>Status:</strong> <span id="deviceStatusText">Ready</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Morse Input -->
+        <section class="card">
+            <div class="card-header">
+                <h3>👁️ Live Morse Input</h3>
+                <div class="live-status">
+                    <span class="pulse-indicator" id="pulseIndicator"></span>
+                    <span>Listening for blinks...</span>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="morse-display">
+                    <div class="morse-section">
+                        <label>Current Building Pattern</label>
+                        <div class="morse-building" id="building">
+                            <span class="building-text">—</span>
+                            <span class="building-cursor"></span>
+                        </div>
+                        <div class="morse-raw" id="liveMorse">(waiting for input)</div>
+                    </div>
+                    <div class="morse-section">
+                        <label>Decoded Text</label>
+                        <div class="decoded-display" id="decoded" contenteditable="true"></div>
+                        <div class="word-count">Words: <span id="wordCount">0</span> | Characters: <span id="charCount">0</span></div>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn btn-success" id="saveBtn">
+                        <span>💾</span> Save Message
+                    </button>
+                    <button class="btn btn-info" id="translateBtn">
+                        <span>🌐</span> Translate to Bangla
+                    </button>
+                    <button class="btn btn-secondary" id="speakBtn">
+                        <span>🔊</span> Speak
+                    </button>
+                    <button class="btn btn-outline" id="clearBtn">
+                        <span>🗑️</span> Clear
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Manual Morse Input -->
+        <section class="card">
+            <div class="card-header">
+                <h3>⌨️ Manual Morse Input</h3>
+            </div>
+            <div class="card-body">
+                <div class="manual-input-section">
+                    <label>Manual Pattern Input</label>
+                    <div class="manual-display" id="manualBox" contenteditable="true"></div>
+                    <div class="manual-controls">
+                        <button class="morse-btn" data-ch=".">
+                            <span class="morse-symbol">•</span>
+                            <span class="morse-label">Dot</span>
+                        </button>
+                        <button class="morse-btn" data-ch="-">
+                            <span class="morse-symbol">—</span>
+                            <span class="morse-label">Dash</span>
+                        </button>
+                        <button class="morse-btn" data-ch=" ">
+                            <span class="morse-symbol">␣</span>
+                            <span class="morse-label">Space</span>
+                        </button>
+                        <button class="morse-btn" data-ch="/">
+                            <span class="morse-symbol">/</span>
+                            <span class="morse-label">Word Sep</span>
+                        </button>
+                        <button class="btn btn-outline btn-sm" id="mClear">Clear</button>
+                        <button class="btn btn-primary btn-sm" id="mSend">Add to Text</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Reference -->
+        <section class="card">
+            <div class="card-header">
+                <h3>📚 Quick Reference</h3>
+                <button class="btn btn-outline btn-sm" id="toggleQuickRef">Toggle</button>
+            </div>
+            <div class="card-body quick-ref" id="quickRefContent" style="display: none;">
+                <div class="ref-grid">
+                    <div class="ref-section">
+                        <h4>Common words</h4>
+                        <div class="ref-items">
+                            <div class="ref-item"><code>—•——  ——— ••—</code> = You</div>
+                            <div class="ref-item"><code>—•••</code> = B</div>
+                            <div class="ref-item"><code>•</code> = E</div>
+                            <div class="ref-item"><code>••</code> = I</div>
+                            <div class="ref-item"><code>—</code> = T</div>
+                            <div class="ref-item"><code>—•—</code> = N</div>
+                            <div class="ref-item"><code>••—</code> = A</div>
+                        </div>
+                    </div>
+                    <div class="ref-section">
+                        <h4>Numbers</h4>
+                        <div class="ref-items">
+                            <div class="ref-item"><code>•————</code> = 1</div>
+                            <div class="ref-item"><code>••———</code> = 2</div>
+                            <div class="ref-item"><code>•••——</code> = 3</div>
+                            <div class="ref-item"><code>••••—</code> = 4</div>
+                            <div class="ref-item"><code>•••••</code> = 5</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="morse.js"></script>
+    <script src="storage.js"></script>
+    <script src="communication.js"></script>
+</body>
+</html>

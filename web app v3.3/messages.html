@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - Eye-Blink Morse</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Morse-Blink</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="communication.html" class="nav-link">Communication</a>
+                <a href="messages.html" class="nav-link active">Messages</a>
+                <a href="settings.html" class="nav-link">Settings</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Messages Header -->
+        <section class="page-header">
+            <div class="page-title">
+                <h1>📨 Saved Messages</h1>
+                <p>Manage and export your communication history</p>
+            </div>
+            <div class="page-actions">
+                <button class="btn btn-success" id="exportPdfBtn">
+                    <span>📄</span> Export PDF
+                </button>
+                <button class="btn btn-danger" id="clearAllBtn">
+                    <span>🗑️</span> Clear All
+                </button>
+            </div>
+        </section>
+
+        <!-- Messages Stats -->
+        <section class="stats-row">
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-number" id="totalMessages">0</div>
+                <div class="stat-label">Total Messages</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🌐</div>
+                <div class="stat-number" id="translatedCount">0</div>
+                <div class="stat-label">Translated</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📝</div>
+                <div class="stat-number" id="totalWords">0</div>
+                <div class="stat-label">Total Words</div>
+            </div>
+        </section>
+
+        <!-- Search and Filter -->
+        <section class="card">
+            <div class="card-header">
+                <h3>🔍 Search & Filter</h3>
+            </div>
+            <div class="card-body">
+                <div class="search-controls">
+                    <input type="text" id="searchInput" placeholder="Search messages..." class="search-input">
+                    <select id="filterSelect" class="filter-select">
+                        <option value="all">All Messages</option>
+                        <option value="original">Original Only</option>
+                        <option value="translated">Translated Only</option>
+                    </select>
+                    <select id="sortSelect" class="filter-select">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="longest">Longest First</option>
+                        <option value="shortest">Shortest First</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Messages List -->
+        <section class="card">
+            <div class="card-header">
+                <h3>💬 Messages</h3>
+                <div class="message-count">
+                    Showing <span id="showingCount">0</span> of <span id="totalCount">0</span> messages
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="messagesList" class="messages-container">
+                    <div class="empty-state" id="emptyState">
+                        <div class="empty-icon">📭</div>
+                        <h3>No messages found</h3>
+                        <p>Start communicating to see your messages here</p>
+                        <a href="communication.html" class="btn btn-primary">Start Communication</a>
+                    </div>
+                </div>
+                <div class="pagination" id="pagination" style="display: none;">
+                    <button class="btn btn-outline" id="prevPage" disabled>← Previous</button>
+                    <span class="page-info">Page <span id="currentPage">1</span> of <span id="totalPages">1</span></span>
+                    <button class="btn btn-outline" id="nextPage" disabled>Next →</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="morse.js"></script>
+    <script src="storage.js"></script>
+    <script src="messages.js"></script>
+</body>
+</html>
