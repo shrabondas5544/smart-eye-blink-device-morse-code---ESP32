@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - Eye-Blink Morse</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="messages.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="logo-icon">👁️</div>
+                <h2>Eye-Blink Morse</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">
+                    <span class="nav-icon">🏠</span>
+                    <span>Home</span>
+                </a>
+                <a href="communication.html" class="nav-link">
+                    <span class="nav-icon">📡</span>
+                    <span>Communication</span>
+                </a>
+                <a href="messages.html" class="nav-link active">
+                    <span class="nav-icon">💬</span>
+                    <span>Messages</span>
+                </a>
+                <a href="settings.html" class="nav-link">
+                    <span class="nav-icon">⚙️</span>
+                    <span>Settings</span>
+                </a>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <span class="theme-icon">🌙</span>
+                </button>
+                <div class="nav-mobile-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Messages Header -->
+        <section class="hero">
+            <div class="hero-background">
+                <div class="hero-pattern"></div>
+            </div>
+            <div class="page-title">
+                <div class="page-badge">
+                    <span class="badge-icon">✨</span>
+                    <span>Communication History</span>
+                </div>
+                <h1>📨 Saved Messages</h1>
+                <p>Manage and export your communication history with advanced filtering and search capabilities</p>
+            </div>
+            <div class="page-actions">
+                <button class="btn btn-success btn-hero" id="exportPdfBtn">
+                    <span class="btn-icon">📄</span>
+                    <span>Export PDF</span>
+                    <span class="btn-shimmer"></span>
+                </button>
+                <button class="btn btn-danger btn-hero" id="clearAllBtn">
+                    <span class="btn-icon">🗑️</span>
+                    <span>Clear All</span>
+                    <span class="btn-shimmer"></span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Messages Stats -->
+        <section class="dashboard">
+            <div class="stats-grid stats-row">
+                <div class="stat-card messages-total-stat">
+                    <div class="stat-header">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-trend">📈</div>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="totalMessages">0</div>
+                        <div class="stat-label">Total Messages</div>
+                        <div class="stat-description">All communications</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card translated-stat">
+                    <div class="stat-header">
+                        <div class="stat-icon">🌍</div>
+                        <div class="stat-indicator">
+                            <div class="progress-ring"></div>
+                        </div>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="translatedCount">0</div>
+                        <div class="stat-label">Translated</div>
+                        <div class="stat-description">Processed messages</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card words-stat">
+                    <div class="stat-header">
+                        <div class="stat-icon">📝</div>
+                        <div class="stat-progress">
+                            <div class="pulse-dot"></div>
+                        </div>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="totalWords">0</div>
+                        <div class="stat-label">Total Words</div>
+                        <div class="stat-description">Content volume</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card frequency-stat">
+                    <div class="stat-header">
+                        <div class="stat-icon">⚡</div>
+                        <div class="stat-trend">📊</div>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="avgWordsPerMessage">0</div>
+                        <div class="stat-label">Avg Words</div>
+                        <div class="stat-description">Per message</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search and Filter -->
+        <section class="card modern-card search-card">
+            <div class="card-header">
+                <div class="card-title">
+                    <div class="card-icon">🔍</div>
+                    <h3>Search & Filter</h3>
+                </div>
+                <div class="card-badge">Tools</div>
+            </div>
+            <div class="card-body">
+                <div class="search-controls modern-search-controls">
+                    <div class="search-group">
+                        <div class="search-input-wrapper modern-search-wrapper">
+                            <div class="search-icon">🔍</div>
+                            <input type="text" id="searchInput" placeholder="Search messages, morse code, or translations..." class="search-input modern-search-input">
+                            <div class="search-clear" id="clearSearchBtn" style="display: none;">✕</div>
+                        </div>
+                    </div>
+                    <div class="filters-group modern-filters-group">
+                        <div class="filter-wrapper modern-filter-wrapper">
+                            <label class="filter-label">Filter Type</label>
+                            <select id="filterSelect" class="filter-select modern-filter-select">
+                                <option value="all">All Messages</option>
+                                <option value="original">Original Only</option>
+                                <option value="translated">Translated Only</option>
+                                <option value="today">Today</option>
+                                <option value="week">This Week</option>
+                                <option value="month">This Month</option>
+                            </select>
+                        </div>
+                        <div class="filter-wrapper modern-filter-wrapper">
+                            <label class="filter-label">Sort By</label>
+                            <select id="sortSelect" class="filter-select modern-filter-select">
+                                <option value="newest">Newest First</option>
+                                <option value="oldest">Oldest First</option>
+                                <option value="longest">Longest First</option>
+                                <option value="shortest">Shortest First</option>
+                                <option value="alphabetical">A-Z</option>
+                            </select>
+                        </div>
+                        <div class="filter-actions">
+                            <button class="btn btn-outline btn-sm" id="resetFiltersBtn">
+                                <span class="btn-icon">🔄</span>
+                                <span>Reset</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Messages List -->
+        <section class="card modern-card messages-list-card">
+            <div class="card-header">
+                <div class="card-title">
+                    <div class="card-icon">💬</div>
+                    <h3>Messages</h3>
+                </div>
+                <div class="message-count modern-message-count">
+                    <span class="count-badge modern-count-badge">
+                        Showing <span id="showingCount">0</span> of <span id="totalCount">0</span> messages
+                    </span>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="messagesList" class="messages-container modern-messages-container">
+                    <div class="empty-state modern-empty" id="emptyState">
+                        <div class="empty-illustration">
+                            <div class="empty-icon">🔭</div>
+                            <div class="empty-particles">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <h3>No messages found</h3>
+                        <p>Start communicating to see your messages here, or adjust your search filters to find specific content</p>
+                        <a href="communication.html" class="btn btn-primary btn-hero">
+                            <span class="btn-icon">🚀</span>
+                            <span>Start Communication</span>
+                            <span class="btn-shimmer"></span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Pagination -->
+                <div class="pagination modern-pagination" id="pagination" style="display: none;">
+                    <button class="btn btn-outline pagination-btn" id="prevPage" disabled>
+                        <span class="btn-icon">←</span>
+                        <span>Previous</span>
+                    </button>
+                    <div class="page-info modern-page-info">
+                        <span class="page-indicator">
+                            Page <span id="currentPage">1</span> of <span id="totalPages">1</span>
+                        </span>
+                        <div class="page-size-selector">
+                            <select id="pageSizeSelect" class="page-size-select">
+                                <option value="10" selected>10 per page</option>
+                                <option value="25">25 per page</option>
+                                <option value="50">50 per page</option>
+                                <option value="100">100 per page</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline pagination-btn" id="nextPage" disabled>
+                        <span>Next</span>
+                        <span class="btn-icon">→</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Message Analytics -->
+        <section class="card modern-card analytics-card" id="analyticsCard" style="display: none;">
+            <div class="card-header">
+                <div class="card-title">
+                    <div class="card-icon">📊</div>
+                    <h3>Message Analytics</h3>
+                </div>
+                <button class="btn btn-outline btn-sm card-toggle" id="toggleAnalytics">
+                    <span>Show Analytics</span>
+                    <span class="toggle-icon">▼</span>
+                </button>
+            </div>
+            <div class="card-body analytics-body" id="analyticsContent" style="display: none;">
+                <div class="analytics-grid">
+                    <div class="analytics-section">
+                        <h4>📈 Usage Patterns</h4>
+                        <div class="analytics-items">
+                            <div class="analytics-item">
+                                <span class="analytics-label">Most Active Day</span>
+                                <span class="analytics-value" id="mostActiveDay">-</span>
+                            </div>
+                            <div class="analytics-item">
+                                <span class="analytics-label">Peak Hour</span>
+                                <span class="analytics-value" id="peakHour">-</span>
+                            </div>
+                            <div class="analytics-item">
+                                <span class="analytics-label">Longest Message</span>
+                                <span class="analytics-value" id="longestMessage">-</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-section">
+                        <h4>🌍 Language Distribution</h4>
+                        <div class="analytics-items" id="languageStats">
+                            <div class="analytics-item">
+                                <span class="analytics-label">English</span>
+                                <span class="analytics-value">0%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-section">
+                        <h4>⚡ Performance Metrics</h4>
+                        <div class="analytics-items">
+                            <div class="analytics-item">
+                                <span class="analytics-label">Avg Processing Time</span>
+                                <span class="analytics-value" id="avgProcessingTime">-</span>
+                            </div>
+                            <div class="analytics-item">
+                                <span class="analytics-label">Success Rate</span>
+                                <span class="analytics-value" id="successRate">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section class="card modern-card actions-card">
+            <div class="card-header">
+                <div class="card-title">
+                    <div class="card-icon">⚡</div>
+                    <h3>Quick Actions</h3>
+                </div>
+                <div class="card-badge">Shortcuts</div>
+            </div>
+            <div class="card-body">
+                <div class="actions-grid">
+                    <button class="action-btn modern-action-btn" id="exportJsonBtn">
+                        <div class="action-icon">📋</div>
+                        <div class="action-content">
+                            <div class="action-title">Export JSON</div>
+                            <div class="action-desc">Raw data format</div>
+                        </div>
+                    </button>
+                    
+                    <button class="action-btn modern-action-btn" id="exportCsvBtn">
+                        <div class="action-icon">📊</div>
+                        <div class="action-content">
+                            <div class="action-title">Export CSV</div>
+                            <div class="action-desc">Spreadsheet format</div>
+                        </div>
+                    </button>
+                    
+                    <button class="action-btn modern-action-btn" id="shareMessagesBtn">
+                        <div class="action-icon">📤</div>
+                        <div class="action-content">
+                            <div class="action-title">Share Selected</div>
+                            <div class="action-desc">Copy to clipboard</div>
+                        </div>
+                    </button>
+                    
+                    <button class="action-btn modern-action-btn" id="printMessagesBtn">
+                        <div class="action-icon">🖨️</div>
+                        <div class="action-content">
+                            <div class="action-title">Print Messages</div>
+                            <div class="action-desc">Physical copy</div>
+                        </div>
+                    </button>
+                    
+                    <button class="action-btn modern-action-btn" id="selectAllBtn">
+                        <div class="action-icon">☑️</div>
+                        <div class="action-content">
+                            <div class="action-title">Select All</div>
+                            <div class="action-desc">Bulk operations</div>
+                        </div>
+                    </button>
+                    
+                    <button class="action-btn modern-action-btn" id="refreshMessagesBtn">
+                        <div class="action-icon">🔄</div>
+                        <div class="action-content">
+                            <div class="action-title">Refresh</div>
+                            <div class="action-desc">Reload messages</div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer modern-footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <div class="logo-icon">👁️</div>
+                        <span>Eye-Blink Morse</span>
+                    </div>
+                    <p>Built for accessibility and seamless communication</p>
+                </div>
+                <div class="footer-info">
+                    <div class="footer-year">&copy; 2025</div>
+                    <div class="footer-tech">
+                        <span>Powered by</span>
+                        <span class="tech-stack">Web APIs • Bluetooth LE • Serial</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-pattern"></div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="morse.js"></script>
+    <script src="storage.js"></script>
+    <script src="messages.js"></script>
+</body>
+</html>
