@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Eye-Blink Morse</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="logo-icon">👁️</div>
+                <h2>Eye-Blink Morse</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">
+                    <span class="nav-icon">🏠</span>
+                    <span>Home</span>
+                </a>
+                <a href="communication.html" class="nav-link">
+                    <span class="nav-icon">📡</span>
+                    <span>Communication</span>
+                </a>
+                <a href="messages.html" class="nav-link">
+                    <span class="nav-icon">💬</span>
+                    <span>Messages</span>
+                </a>
+                <a href="settings.html" class="nav-link active">
+                    <span class="nav-icon">⚙️</span>
+                    <span>Settings</span>
+                </a>
+            </div>
+            <div class="nav-actions">
+                <div class="theme-toggle" id="themeToggleNav">
+                    <span class="theme-icon">🌙</span>
+                </div>
+            </div>
+            <div class="nav-mobile-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Settings Header -->
+        <section class="hero">
+            <div class="hero-background">
+                <div class="hero-pattern"></div>
+            </div>
+            <div class="page-title">
+                <div class="page-badge">
+                    <span class="badge-icon">⚙️</span>
+                    <span>Customization Hub</span>
+                </div>
+                <h1>Settings & Preferences</h1>
+                <p>Customize your Eye-Blink Morse experience to suit your needs and preferences</p>
+            </div>
+            <div class="page-actions">
+                <button class="btn btn-secondary btn-hero" id="resetAllSettingsBtn">
+                    <span class="btn-icon">🔄</span>
+                    <span>Reset All</span>
+                    <span class="btn-shimmer"></span>
+                </button>
+                <button class="btn btn-primary btn-hero" id="saveSettingsBtn">
+                    <span class="btn-icon">💾</span>
+                    <span>Save Settings</span>
+                    <span class="btn-shimmer"></span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Settings Categories -->
+        <div class="settings-grid">
+            <!-- Appearance Settings -->
+            <section class="card modern-card settings-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon">🎨</div>
+                        <h3>Appearance</h3>
+                    </div>
+                    <div class="card-badge">Visual</div>
+                </div>
+                <div class="card-body">
+                    <div class="settings-section">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Theme Mode</div>
+                                <div class="setting-description">Choose between light and dark appearance</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="modern-theme-toggle" id="themeToggle">
+                                    <input type="checkbox" id="themeCheckbox" class="toggle-input">
+                                    <label for="themeCheckbox" class="toggle-label">
+                                        <div class="toggle-slider">
+                                            <div class="toggle-thumb">
+                                                <span class="toggle-icon light">☀️</span>
+                                                <span class="toggle-icon dark">🌙</span>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Font Size</div>
+                                <div class="setting-description">Adjust text size for better readability</div>
+                            </div>
+                            <div class="setting-control">
+                                <select id="fontSizeSelect" class="modern-select">
+                                    <option value="small">Small</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="large">Large</option>
+                                    <option value="extra-large">Extra Large</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Animations</div>
+                                <div class="setting-description">Enable or disable interface animations</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="modern-checkbox">
+                                    <input type="checkbox" id="animationsCheckbox" checked>
+                                    <span class="checkbox-mark"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Audio & Voice Settings -->
+            <section class="card modern-card settings-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon">🔊</div>
+                        <h3>Audio & Voice</h3>
+                    </div>
+                    <div class="card-badge">Sound</div>
+                </div>
+                <div class="card-body">
+                    <div class="settings-section">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Voice Gender</div>
+                                <div class="setting-description">Preferred voice for text-to-speech</div>
+                            </div>
+                            <div class="setting-control">
+                                <select id="voiceGenderSelect" class="modern-select">
+                                    <option value="female">Female</option>
+                                    <option value="male">Male</option>
+                                    <option value="auto">Auto (System Default)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Speech Speed</div>
+                                <div class="setting-description">Adjust speaking rate: <span id="speedValue" class="setting-value">1.0x</span></div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="modern-slider-wrapper">
+                                    <input type="range" id="speechSpeedSlider" min="0.5" max="2.0" step="0.1" value="1.0" class="modern-slider">
+                                    <div class="slider-track"></div>
+                                    <div class="slider-labels">
+                                        <span>0.5x</span>
+                                        <span>1.0x</span>
+                                        <span>2.0x</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Voice Pitch</div>
+                                <div class="setting-description">Adjust voice pitch: <span id="pitchValue" class="setting-value">Normal</span></div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="modern-slider-wrapper">
+                                    <input type="range" id="voicePitchSlider" min="0.5" max="2.0" step="0.1" value="1.0" class="modern-slider">
+                                    <div class="slider-track"></div>
+                                    <div class="slider-labels">
+                                        <span>Low</span>
+                                        <span>Normal</span>
+                                        <span>High</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Test Voice</div>
+                                <div class="setting-description">Preview your voice settings</div>
+                            </div>
+                            <div class="setting-control">
+                                <button class="btn btn-outline" id="testVoiceBtn">
+                                    <span class="btn-icon">🎵</span>
+                                    <span>Test Voice</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Device & Connection Settings -->
+            <section class="card modern-card settings-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon">📱</div>
+                        <h3>Device & Connection</h3>
+                    </div>
+                    <div class="card-badge">Hardware</div>
+                </div>
+                <div class="card-body">
+                    <div class="settings-section">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Auto-Connect</div>
+                                <div class="setting-description">Automatically connect to the last used device</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="modern-checkbox">
+                                    <input type="checkbox" id="autoConnectCheckbox">
+                                    <span class="checkbox-mark"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Baud Rate</div>
+                                <div class="setting-description">Serial communication speed</div>
+                            </div>
+                            <div class="setting-control">
+                                <select id="baudRateSelect" class="modern-select">
+                                    <option value="9600">9600</option>
+                                    <option value="57600">57600</option>
+                                    <option value="115200" selected>115200</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Connection Timeout</div>
+                                <div class="setting-description">Timeout for device connection: <span id="timeoutValue" class="setting-value">10s</span></div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="modern-slider-wrapper">
+                                    <input type="range" id="connectionTimeoutSlider" min="5" max="30" step="5" value="10" class="modern-slider">
+                                    <div class="slider-track"></div>
+                                    <div class="slider-labels">
+                                        <span>5s</span>
+                                        <span>15s</span>
+                                        <span>30s</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Translation Settings -->
+            <section class="card modern-card settings-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon">🌍</div>
+                        <h3>Translation</h3>
+                    </div>
+                    <div class="card-badge">Language</div>
+                </div>
+                <div class="card-body">
+                    <div class="settings-section">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Default Target Language</div>
+                                <div class="setting-description">Language to translate to by default</div>
+                            </div>
+                            <div class="setting-control">
+                                <select id="targetLanguageSelect" class="modern-select">
+                                    <option value="bn" selected>Bengali (বাংলা)</option>
+                                    <option value="hi">Hindi (हिन्दी)</option>
+                                    <option value="ur">Urdu (اردو)</option>
+                                    <option value="es">Spanish (Español)</option>
+                                    <option value="fr">French (Français)</option>
+                                    <option value="de">German (Deutsch)</option>
+                                    <option value="zh">Chinese (中文)</option>
+                                    <option value="ja">Japanese (日本語)</option>
+                                    <option value="ar">Arabic (العربية)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Auto-Translate</div>
+                                <div class="setting-description">Automatically translate messages after decoding</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="modern-checkbox">
+                                    <input type="checkbox" id="autoTranslateCheckbox">
+                                    <span class="checkbox-mark"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Translation Confidence</div>
+                                <div class="setting-description">Show translation confidence scores</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="modern-checkbox">
+                                    <input type="checkbox" id="showConfidenceCheckbox" checked>
+                                    <span class="checkbox-mark"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Data Management Settings -->
+            <section class="card modern-card settings-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon">💾</div>
+                        <h3>Data Management</h3>
+                    </div>
+                    <div class="card-badge">Storage</div>
+                </div>
+                <div class="card-body">
+                    <div class="settings-section">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Auto-Save Messages</div>
+                                <div class="setting-description">Automatically save decoded messages</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="modern-checkbox">
+                                    <input type="checkbox" id="autoSaveCheckbox" checked>
+                                    <span class="checkbox-mark"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Message Limit</div>
+                                <div class="setting-description">Maximum number of messages to keep</div>
+                            </div>
+                            <div class="setting-control">
+                                <select id="messageLimitSelect" class="modern-select">
+                                    <option value="50">50 messages</option>
+                                    <option value="100" selected>100 messages</option>
+                                    <option value="250">250 messages</option>
+                                    <option value="500">500 messages</option>
+                                    <option value="-1">Unlimited</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Export & Import</div>
+                                <div class="setting-description">Backup and restore your settings</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="button-group modern-button-group">
+                                    <button class="btn btn-outline btn-sm" id="exportSettingsBtn">
+                                        <span class="btn-icon">📤</span>
+                                        <span>Export</span>
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" id="importSettingsBtn">
+                                        <span class="btn-icon">📥</span>
+                                        <span>Import</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Accessibility Settings -->
+            <section class="card modern-card settings-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon">♿</div>
+                        <h3>Accessibility</h3>
+                    </div>
+                    <div class="card-badge">Access</div>
+                </div>
+                <div class="card-body">
+                    <div class="settings-section">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">High Contrast</div>
+                                <div class="setting-description">Enable high contrast mode for better visibility</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="modern-checkbox">
+                                    <input type="checkbox" id="highContrastCheckbox">
+                                    <span class="checkbox-mark"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Reduced Motion</div>
+                                <div class="setting-description">Minimize animations and transitions</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="modern-checkbox">
+                                    <input type="checkbox" id="reducedMotionCheckbox">
+                                    <span class="checkbox-mark"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Focus Indicators</div>
+                                <div class="setting-description">Enhanced focus indicators for keyboard navigation</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="modern-checkbox">
+                                    <input type="checkbox" id="focusIndicatorsCheckbox" checked>
+                                    <span class="checkbox-mark"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- System Information -->
+        <section class="card modern-card">
+            <div class="card-header">
+                <div class="card-title">
+                    <div class="card-icon">ℹ️</div>
+                    <h3>System Information</h3>
+                </div>
+                <div class="card-badge">Info</div>
+            </div>
+            <div class="card-body">
+                <div class="system-info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Application Version</div>
+                        <div class="info-value">4.3.0</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Storage Used</div>
+                        <div class="info-value" id="storageUsed">Calculating...</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Messages Stored</div>
+                        <div class="info-value" id="messagesStored">0</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Last Backup</div>
+                        <div class="info-value" id="lastBackup">Never</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Browser Support</div>
+                        <div class="info-value" id="browserSupport">
+                            <span class="support-indicator">✅ Full Support</span>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Serial API</div>
+                        <div class="info-value" id="serialSupport">
+                            <span class="support-indicator">✅ Available</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Danger Zone -->
+        <section class="card modern-card danger-card">
+            <div class="card-header">
+                <div class="card-title">
+                    <div class="card-icon">⚠️</div>
+                    <h3>Danger Zone</h3>
+                </div>
+                <div class="card-badge danger">Caution</div>
+            </div>
+            <div class="card-body">
+                <div class="danger-actions">
+                    <div class="danger-item">
+                        <div class="danger-info">
+                            <div class="danger-title">Reset All Settings</div>
+                            <div class="danger-description">Reset all settings to their default values. This action cannot be undone.</div>
+                        </div>
+                        <button class="btn btn-warning" id="resetSettingsBtn">
+                            <span class="btn-icon">🔄</span>
+                            <span>Reset Settings</span>
+                        </button>
+                    </div>
+                    <div class="danger-item">
+                        <div class="danger-info">
+                            <div class="danger-title">Clear All Data</div>
+                            <div class="danger-description">Delete all messages, settings, and application data. This action is irreversible.</div>
+                        </div>
+                        <button class="btn btn-danger" id="clearAllDataBtn">
+                            <span class="btn-icon">🗑️</span>
+                            <span>Clear All Data</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer modern-footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <div class="logo-icon">👁️</div>
+                        <span>Eye-Blink Morse</span>
+                    </div>
+                    <p>Built for accessibility and seamless communication</p>
+                </div>
+                <div class="footer-info">
+                    <div class="footer-year">&copy; 2025</div>
+                    <div class="footer-tech">
+                        <span>Powered by</span>
+                        <span class="tech-stack">Web APIs • Bluetooth LE • Serial</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-pattern"></div>
+        </div>
+    </footer>
+
+    <!-- Hidden file input for importing settings -->
+    <input type="file" id="importFileInput" accept=".json" style="display: none;">
+
+    <!-- Include existing JavaScript files -->
+    <script src="morse.js"></script>
+    <script src="storage.js"></script>
+    <script src="settings.js"></script>
+</body>
+</html>
